@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task Grabber — Win your next move</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,600;9..40,700;9..40,800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#"><span class="brand-icon">✦</span> TASK GRABBER</a>
+      <div class="streak"><span>⚡</span> <b id="streakCount">3</b> day streak</div>
+      <button class="task-menu-button" id="taskMenuButton" aria-label="Open task menu"><span>☰</span> Tasks <i id="taskCount">0</i></button>
+    </header>
+
+    <section class="hero-copy">
+      <p class="eyebrow">YOUR PRODUCTIVITY ARCADE</p>
+      <h1>Choose your next task,<br /><em>then make real progress.</em></h1>
+      <p class="subtitle">Let the machine narrow your focus to one meaningful next step, so you can spend less energy deciding and more energy moving forward.</p>
+    </section>
+
+    <section class="game-layout">
+      <aside class="score-panel">
+        <div class="score-card"><span class="mini-label">TODAY'S WINS</span><strong id="winsCount">0</strong><span class="win-label">tasks cleared</span></div>
+        <div class="score-card mint"><span class="mini-label">PLAY TOKENS</span><strong id="tokenCount">5</strong><span class="win-label">keep the momentum</span></div>
+      </aside>
+
+      <div class="machine-wrap">
+        <div class="machine-glow"></div>
+        <div class="machine">
+          <div class="machine-top"><span>LUCKY</span><div class="marquee-dots">✦ ✦ ✦ ✦ ✦ ✦</div><span>GRAB</span></div>
+          <div class="machine-window" id="machineWindow">
+            <div class="scanline"></div>
+            <div class="rail"></div>
+            <div class="claw-rig" id="clawRig">
+              <div class="cable"></div><div class="claw-head">◆</div>
+              <div class="claw-arm left-arm"></div><div class="claw-arm center-arm"></div><div class="claw-arm right-arm"></div>
+            </div>
+            <div class="capsule-bed" id="capsuleBed"></div>
+            <div class="prize-chute"><span>DROP</span><b>⌄</b></div>
+          </div>
+          <div class="machine-controls"><div class="arcade-controls"><button class="control-key" id="leftButton" aria-label="Choose previous capsule">←</button><button class="grab-button" id="grabButton"><span>↓</span> GRAB RANDOM</button><button class="control-key" id="rightButton" aria-label="Choose next capsule">→</button></div><p id="machineHint">Choose a capsule yourself, or let the machine choose a useful next step for you.</p></div>
+        </div>
+      </div>
+
+      <aside class="how-card"><span class="how-number">01</span><h2>Give one task your full attention.</h2><p>Choose a capsule, receive one clear task, and enjoy the momentum that comes from completing it.</p><div class="divider"></div><span class="tiny-pill">LESS DECISION FATIGUE</span></aside>
+    </section>
+  </main>
+
+  <div class="task-drawer" id="taskDrawer" aria-hidden="true">
+    <div class="drawer-scrim" id="drawerScrim"></div>
+    <section class="drawer-panel">
+      <div class="drawer-head"><div><p class="eyebrow">MISSION CONTROL</p><h2>Your task stash</h2></div><div class="drawer-actions"><button class="clear-button" id="clearTasks">CLEAR</button><button class="icon-button" id="closeDrawer" aria-label="Close">×</button></div></div>
+      <form class="task-form" id="taskForm"><input id="taskInput" maxlength="68" placeholder="Add a task to the machine…" autocomplete="off" /><button aria-label="Add task">+</button></form>
+      <p class="task-error" id="taskError" role="status" aria-live="polite"></p>
+      <div class="task-list" id="taskList"></div>
+      <p class="drawer-foot">Tip: Keep your tasks small enough to finish in one sitting.</p>
+    </section>
+  </div>
+
+  <div class="onboarding" id="onboarding">
+    <div class="onboarding-card">
+      <div class="sparkle s1">✦</div><div class="sparkle s2">✦</div>
+      <div class="ticket-icon">✦</div><p class="eyebrow">WELCOME TO TASK GRABBER</p>
+      <h2>What do you want<br />to <em>get done?</em></h2>
+      <p>Add a few tasks, then let the claw choose your next move.</p>
+      <form id="welcomeForm" class="welcome-form"><input id="welcomeInput" maxlength="68" placeholder="e.g. Reply to Alex's email" autocomplete="off" /><button>ADD TO MACHINE <span>→</span></button></form>
+      <button class="sample-button" id="sampleButton">Or load a quick starter set</button>
+    </div>
+  </div>
+
+  <div class="reward-modal" id="rewardModal" aria-hidden="true"><div class="reward-card"><button class="icon-button reward-close" id="rewardClose">×</button><div class="confetti">✦ &nbsp; ✦ &nbsp; ★</div><p class="eyebrow" id="rewardEyebrow">YOUR NEXT FOCUS TASK</p><div class="reward-orb">✦</div><h2 id="rewardTask">Your task goes here</h2><p id="rewardCopy">Give this one task your attention, then return to celebrate the progress you made.</p><div class="reward-actions" id="rewardActions"><button class="done-button" id="doneButton">I COMPLETED IT <span>✓</span></button><button class="reroll-button" id="rerollButton">Choose a different task</button></div></div></div>
+  <div class="streak-modal" id="streakModal" aria-hidden="true"><div class="streak-modal-card"><div class="streak-flame">⚡</div><p class="eyebrow">WELCOME BACK, PLAYER</p><h2><span id="streakModalCount">0</span>-day streak!</h2><p>Build your streak by doing tasks every day. One small win today keeps your momentum alive.</p><button class="done-button" id="streakModalClose">LET'S PLAY <span>→</span></button></div></div>
+  <div class="win-toast" id="winToast">+1 TOKEN <span>✦</span></div>
+  <script src="app.js"></script>
+</body>
+</html>
